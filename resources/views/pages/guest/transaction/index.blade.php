@@ -37,7 +37,7 @@ state([
                             <tr>
                                 <th>No. </th>
                                 <th>Nama</th>
-                                <th>Kategori</th>
+                                {{-- <th>Kategori</th> --}}
                                 <th>Status</th>
                                 <th>#</th>
                             </tr>
@@ -47,7 +47,7 @@ state([
                                 <tr>
                                     <td>{{ ++$no }}.</td>
                                     <td>{{ $item->product->name }}</td>
-                                    <td>{{ $item->category->name }}</td>
+                                    {{-- <td>{{ $item->category->name }}</td> --}}
                                     <td>
 
                                         <button class="btn btn-primary">
