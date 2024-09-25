@@ -79,7 +79,7 @@ state([
                         <div class="col-lg-3 col-sm-6 mb-6">
                             <div class="card service-card shadow-hover rounded-3 text-center align-items-center">
                                 <div class="card-body p-xxl-5 p-4">
-                                    <img src="https://www.trac.astra.co.id/_next/image?url=https%3A%2F%2Fomnispace.blob.core.windows.net%2Fstrapi-prod%2F2024-05-14%2FBus_Rental_0f517411f2_4dbe2ad776.webp&w=1920&q=75"
+                                    <img src="https://omnispace.blob.core.windows.net/strapi-prod/2022-08-19/support_6b2ff398f7_3742193cc3.svg"
                                         width="75" alt="Service" />
                                     <h4 class="mb-3">Pengalaman Lokal</h4>
                                     <p class="mb-0 fw-medium">Nikmati kenyamanan perjalanan di
