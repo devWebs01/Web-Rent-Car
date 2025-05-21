@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ $title ?? '' }} | Rent Car Landing Page UI</title>
+    <title>{{ $title ?? '' }} | {{ $shop->name ?? '' }}</title>
     <!-- PWA  -->
     <meta name="theme-color" content="#ffffff">
 
@@ -30,7 +30,7 @@
 
     <script src="https://kit.fontawesome.com/21fb7efcbe.js" crossorigin="anonymous"></script>
 
-    
+
 
     <style>
         .nav-bottom {

@@ -3,8 +3,9 @@
 namespace App\View\Components;
 
 use Closure;
-use Illuminate\Contracts\View\View;
+use App\Models\Shop;
 use Illuminate\View\Component;
+use Illuminate\Contracts\View\View;
 
 class GuestNav extends Component
 {
@@ -21,6 +22,8 @@ class GuestNav extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('livewire.layouts.guest-nav');
+        $shop = Shop::first();
+
+        return view('components.navigations.guest-nav', compact('shop'));
     }
 }

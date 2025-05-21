@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Shop;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -21,6 +22,8 @@ class AdminLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('layouts.admin-layout');
+        $shop = Shop::first();
+
+        return view('components.layouts.admin-layout', compact('shop'));
     }
 }

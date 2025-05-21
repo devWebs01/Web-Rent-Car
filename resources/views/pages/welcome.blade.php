@@ -4,17 +4,17 @@ use function Livewire\Volt\{state};
 use App\Models\Product;
 use App\Models\Shop;
 
-name('welcome');
+name("welcome");
 
 state([
-    'products' => fn() => Product::has('imageProducts')->with('imageProducts')->inRandomOrder()->limit(6)->get(),
-    'shop' => fn() => Shop::first(),
+    "products" => fn() => Product::has("imageProducts")->with("imageProducts")->inRandomOrder()->limit(6)->get(),
+    "shop" => fn() => Shop::first(),
 ]);
 
 ?>
 
 <x-guest-layout>
-    <x-slot name="title">Aquina Rental Mobil Jambi</x-slot>
+    <x-slot name="title">{{ $shop->name ?? "" }}</x-slot>
     @volt
         <div>
             <section>
@@ -28,7 +28,7 @@ state([
                                 alt="hero-header" />
                         </div>
                         <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
-                            <h4 class="fw-bold text-danger my-3">Aquina, Teman Setia Perjalanmu</h4>
+                            <h4 class="fw-bold text-danger my-3">{{ $shop->name ?? "" }} Teman Setia Perjalanmu</h4>
                             <p class="hero-title fs-6">Bepergian, nikmati, dan jalani hidup baru</p>
 
                         </div>
@@ -39,7 +39,7 @@ state([
             <section class="pt-5 pt-md-2" id="service">
                 <div class="container-fluid">
                     <div class="position-absolute z-index--1 end-0 d-none d-lg-block">
-                        <img src="{{ asset('/front-end/assets/img/category/shape.svg') }}" style="max-width: 200px"
+                        <img src="{{ asset("/front-end/assets/img/category/shape.svg") }}" style="max-width: 200px"
                             alt="service" />
                     </div>
                     <div class="mb-7 text-center">
@@ -48,7 +48,8 @@ state([
                         </h3>
                         <h6 class="text-secondary">
                             Kami mengerti bahwa setiap bisnis dan pribadi memiliki kebutuhan transportasi yang beragam. Oleh
-                            karena itu, Aquina menawarkan berbagai layanan rental kendaraan sebagai solusi untuk memenuhi
+                            karena itu, {{ $shop->name ?? "" }} menawarkan berbagai layanan rental kendaraan sebagai solusi
+                            untuk memenuhi
                             kebutuhan
                             transportasi yang dapat disesuaikan dengan berbagai kebutuhan.
                         </h6>
@@ -105,21 +106,21 @@ state([
             <section id="destination" class="pt-0">
                 <div class="container-fluid">
                     <div class="position-absolute start-100 bottom-0 translate-middle-x d-none d-xl-block ms-xl-n4">
-                        <img src="{{ asset('/front-end/assets/img/dest/shape.svg') }}" alt="destination" />
+                        <img src="{{ asset("/front-end/assets/img/dest/shape.svg") }}" alt="destination" />
                     </div>
                     <div class="mb-7 text-center">
                         <h5 class="text-secondary">Mobil pilihan</h5>
-                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">Aquina Rental Jambi</h3>
+                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">{{ $shop->name ?? "" }}</h3>
                     </div>
                     <div class="row">
                         @foreach ($products as $product)
                             <div class="col-md-6 mb-4">
                                 <a class="text-decoration-none"
-                                    href="{{ route('product-detail', ['product' => $product->id]) }}">
+                                    href="{{ route("product-detail", ["product" => $product->id]) }}">
                                     <div class="card position-relative shadow">
                                         <div class="position-absolute z-index--1 me-10 me-xxl-0"
                                             style="right:-160px;top:-210px;">
-                                            <img src="{{ asset('/front-end/assets/img/steps/bg.png') }}"
+                                            <img src="{{ asset("/front-end/assets/img/steps/bg.png") }}"
                                                 style="max-width:550px;" alt="shape" />
                                         </div>
                                         <div class="card-body p-3">

@@ -1,13 +1,13 @@
 <div id="loading"
     style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.8); z-index: 9999;">
     <div class="text-center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-        <img width="75%" src="https://aquinacar.000webhostapp.com/assets/assets_shop/img/honda.gif" alt="Loading..." />
-        <!-- URL gambar animasi loading -->
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
     </div>
 </div>
 
-
-@push('scripts')
+@push("scripts")
     <script>
         // Tampilkan elemen loading
         function showLoading() {

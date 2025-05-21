@@ -3,8 +3,9 @@
 namespace App\View\Components;
 
 use Closure;
-use Illuminate\Contracts\View\View;
+use App\Models\Shop;
 use Illuminate\View\Component;
+use Illuminate\Contracts\View\View;
 
 class AdminNav extends Component
 {
@@ -21,6 +22,8 @@ class AdminNav extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('livewire.layouts.admin-nav');
+        $shop = Shop::first();
+
+        return view('components.navigations.admin-nav', compact('shop'));
     }
 }

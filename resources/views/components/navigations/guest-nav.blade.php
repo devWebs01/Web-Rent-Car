@@ -18,9 +18,9 @@
         }
     </style>
     <nav class="navbar navbar-expand fixed-top py-0 py-lg-5" data-navbar-on-scroll="data-navbar-on-scroll">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <span class="fw-bolder text-primary f-2">Aquina Rental</span>
+        <div class="container border border-3 rounded border-dark">
+            <a class="navbar-brand py-3 bg-body" href="/">
+                <span class="fw-bolder text-primary f-2">{{ $shop->name ?? "" }}</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
@@ -32,24 +32,24 @@
                         <a class="nav-link fw-medium" aria-current="page" href="/">Beranda</a>
                     </li>
                     <li class="nav-item px-3 px-xl-4 d-none d-lg-block">
-                        <a class="nav-link fw-medium" aria-current="page" href="{{ route('geolocation') }}">
+                        <a class="nav-link fw-medium" aria-current="page" href="{{ route("geolocation") }}">
                             Rental Mobil
                         </a>
                     </li>
                     @auth
-                        @if (auth()->user()->role === 'admin')
+                        @if (auth()->user()->role === "admin")
                             <li class="nav-item px-3 px-xl-4 d-none d-lg-block">
-                                <a class="nav-link fw-medium" aria-current="page" href="{{ route('home') }}">Beranda</a>
+                                <a class="nav-link fw-medium" aria-current="page" href="{{ route("home") }}">Beranda</a>
                             </li>
                         @else
                             <li class="nav-item px-3 px-xl-4 d-none d-lg-block">
-                                <a class="nav-link fw-medium" aria-current="page" href="{{ route('transaction.guest') }}">
+                                <a class="nav-link fw-medium" aria-current="page" href="{{ route("transaction.guest") }}">
                                     Transaksi Mobil
                                 </a>
                             </li>
                             <li class="nav-item px-3 px-xl-4">
                                 <a class="nav-link fw-medium position-relative" aria-current="page"
-                                    href="{{ route('user.account', ['user' => auth()->user()->id]) }}">
+                                    href="{{ route("user.account", ["user" => auth()->user()->id]) }}">
                                     <span class="d-none d-lg-block">
                                         Akun Profil
                                     </span>
@@ -63,7 +63,7 @@
                                 </a>
                             </li>
                             <li class="nav-item px-3 px-xl-4">
-                                <a class="nav-link fw-medium" aria-current="page" href="{{ route('logout') }}"
+                                <a class="nav-link fw-medium" aria-current="page" href="{{ route("logout") }}"
                                     onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                                     <span class="d-none d-lg-block">
@@ -75,14 +75,14 @@
                         @endif
                     @else
                         <li class="nav-item px-3 px-xl-4">
-                            <a class="nav-link fw-medium" aria-current="page" href="{{ route('register') }}">
+                            <a class="nav-link fw-medium" aria-current="page" href="{{ route("register") }}">
                                 <span class="d-none d-lg-block">
                                     Register
                                 </span>
                             </a>
                         </li>
                         <li class="nav-item px-3 px-xl-4">
-                            <a class="nav-link fw-medium" aria-current="page" href="{{ route('login') }}">
+                            <a class="nav-link fw-medium" aria-current="page" href="{{ route("login") }}">
                                 <span class="d-none d-lg-block">
                                     Login
                                 </span>
@@ -105,25 +105,25 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('geolocation') }}" class="nav-link">
+                <a href="{{ route("geolocation") }}" class="nav-link">
                     <i class="bi bi-map-fill fs-5"></i>
                 </a>
             </li>
             @auth
-                @if (auth()->user()->role === 'admin')
+                @if (auth()->user()->role === "admin")
                     <li class="nav-item">
-                        <a href="{{ route('home') }}" class="nav-link">
+                        <a href="{{ route("home") }}" class="nav-link">
                             <i class="bi bi-person-workspace fs-5"></i>
                         </a>
                     </li>
                 @else
                     <li class="nav-item">
-                        <a href="{{ route('transaction.guest') }}" class="nav-link">
+                        <a href="{{ route("transaction.guest") }}" class="nav-link">
                             <i class="bi bi-car-front-fill fs-5"></i>
                         </a>
                     </li>
                 @endif
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                <form id="logout-form" action="{{ route("logout") }}" method="POST" class="d-none">
                     @csrf
                 </form>
 
