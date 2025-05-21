@@ -6,16 +6,16 @@ use App\Models\Category;
 use App\Models\Product;
 use Carbon\Carbon;
 
-name('geolocation');
+name("geolocation");
 
-usesPagination(theme: 'bootstrap');
+usesPagination(theme: "bootstrap");
 
-state(['selectedDate', 'categoryId'])->url();
+state(["selectedDate", "categoryId"])->url();
 state([
-    'firstRental' => fn() => shop::first(),
-    'categories' => fn() => Category::get(),
-    'duration',
-    'rent_date',
+    "firstRental" => fn() => shop::first(),
+    "categories" => fn() => Category::get(),
+    "duration",
+    "rent_date",
 ]);
 
 $search = computed(function () {
@@ -27,18 +27,18 @@ $search = computed(function () {
         return null;
     }
 
-    $availableProducts = Product::whereDoesntHave('transactions', function ($query) use ($selectedDate, $duration) {
+    $availableProducts = Product::whereDoesntHave("transactions", function ($query) use ($selectedDate, $duration) {
         $query->where(function ($query) use ($selectedDate, $duration) {
-            $query->whereHas('datings', function ($query) use ($selectedDate, $duration) {
-                $query->whereIn('status', ['DALAM_PENGGUNAAN', 'TERLAMBAT'])->where(function ($query) use ($selectedDate, $duration) {
-                    $query->where('dateOfTransaction', '<=', $selectedDate)->orWhere('dateOfTransaction', '<', $selectedDate->copy()->addDays($duration));
+            $query->whereHas("datings", function ($query) use ($selectedDate, $duration) {
+                $query->whereIn("status", ["DALAM_PENGGUNAAN", "TERLAMBAT"])->where(function ($query) use ($selectedDate, $duration) {
+                    $query->where("dateOfTransaction", "<=", $selectedDate)->orWhere("dateOfTransaction", "<", $selectedDate->copy()->addDays($duration));
                 });
             });
         });
     })
-        ->when($categoryId !== 'all', function ($query) use ($categoryId) {
-            $query->whereHas('category', function ($query) use ($categoryId) {
-                $query->where('id', $categoryId);
+        ->when($categoryId !== "all", function ($query) use ($categoryId) {
+            $query->whereHas("category", function ($query) use ($categoryId) {
+                $query->where("id", $categoryId);
             });
         })
         ->get();
@@ -112,11 +112,11 @@ $search = computed(function () {
                             @foreach ($this->search() as $product)
                                 <div class="col-md-6 mb-4">
                                     <a class="text-decoration-none"
-                                        href="{{ route('product-detail', ['product' => $product->id]) }}">
+                                        href="{{ route("product-detail", ["product" => $product->id]) }}">
                                         <div class="card position-relative shadow">
                                             <div class="position-absolute z-index--1 me-10 me-xxl-0"
                                                 style="right:-160px;top:-210px;">
-                                                <img src="{{ asset('/front-end/assets/img/steps/bg.png') }}"
+                                                <img src="{{ asset("/front-end/assets/img/steps/bg.png") }}"
                                                     style="max-width:550px;" alt="shape" />
                                             </div>
                                             <div class="card-body p-3">
@@ -163,7 +163,7 @@ $search = computed(function () {
     <div class="container-fluid row pt-12 mb-3">
         <div class="col-lg-6">
             <h1 id="font-custom" class="display-1 fw-bold">
-                Cek Lokasimu <br> Sekarang
+                Kunjungi Lokasi <br> Kami
             </h1>
         </div>
         <div class="col-lg-6 mt-lg-0 align-content-center">
@@ -173,6 +173,6 @@ $search = computed(function () {
             </p>
         </div>
     </div>
-    @include('pages.guest.searching.geolocation')
+    @include("pages.guest.searching.geolocation")
 
 </x-guest-layout>

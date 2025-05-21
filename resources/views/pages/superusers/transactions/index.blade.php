@@ -3,16 +3,16 @@ use function Laravel\Folio\name;
 use function Livewire\Volt\{state, computed, usesPagination};
 use App\Models\Transaction;
 
-name('transactions.index');
+name("transactions.index");
 
-usesPagination(theme: 'bootstrap');
+usesPagination(theme: "bootstrap");
 
-state(['transactions' => fn() => Transaction::latest()->get()]);
+state(["transactions" => fn() => Transaction::latest()->get()]);
 
 ?>
 <x-admin-layout>
     <x-slot name="title">Data Transaksi Rental</x-slot>
-    @include('layouts.responsive')
+    @include("layouts.responsive")
 
     @volt
         <div>
@@ -41,7 +41,8 @@ state(['transactions' => fn() => Transaction::latest()->get()]);
                 </div> --}}
                 <div class="card-body">
                     <div class="table-responsive rounded">
-                        <table wire:ignore id="example" class="table table-hover display border" style="width: 100%">
+                        <table wire:ignore id="example" class="table table-hover display border text-nowrap"
+                            style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>Pelanggan</th>
@@ -63,7 +64,7 @@ state(['transactions' => fn() => Transaction::latest()->get()]);
                                             </span>
                                         </td>
                                         <td>
-                                            <a href="{{ route('transactions.edit', ['transaction' => $item->id]) }}"
+                                            <a href="{{ route("transactions.edit", ["transaction" => $item->id]) }}"
                                                 class="btn btn-sm btn-primary">Detail</a>
                                         </td>
                                     </tr>

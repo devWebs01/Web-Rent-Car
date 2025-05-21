@@ -2,10 +2,12 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Nette\Utils\Random;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -24,6 +26,24 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $imageUrl = 'https://picsum.photos/400/300?' . Str::random(10);
+        $imageName = Str::random(20) . '.jpg'; // pastikan ekstensi
+        $storagePath = 'profile/' . $imageName;
+
+        try {
+            $response = Http::get($imageUrl);
+
+            if ($response->successful()) {
+                Storage::disk('public')->put($storagePath, $response->body());
+            } else {
+                Log::warning("Gagal ambil gambar dari URL: $imageUrl");
+                $storagePath = 'default.jpg'; // fallback
+            }
+        } catch (\Exception $e) {
+            Log::error("Error ambil gambar: " . $e->getMessage());
+            $storagePath = 'default.jpg';
+        }
+
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
@@ -31,9 +51,9 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
             'phone_number' => fake()->phoneNumber(),
-            'role' => fake()->randomElement([ 'customer', 'admin']),
+            'role' => fake()->randomElement(['customer', 'admin']),
             'address' => fake()->address(),
-            'identify' => "https://picsum.photos/200/300?" . Str::random(10),
+            'identify' => $storagePath,
         ];
     }
 
@@ -42,7 +62,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }

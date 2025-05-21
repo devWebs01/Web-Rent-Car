@@ -49,7 +49,7 @@ class ProductSeeder extends Seeder
                 // Trim spaces from the URL
                 $imageUrl = trim($item['image']);
                 $imageName = basename($imageUrl);
-                $imagePath = 'public/images/' . $imageName;
+                $imagePath = 'public/cars/' . $imageName;
 
                 // Download the image using Guzzle
                 $response = $client->get($imageUrl);
@@ -76,7 +76,7 @@ class ProductSeeder extends Seeder
                 // Create product image entry
                 imageProduct::create([
                     'product_id' => $product->id,
-                    'image_path' => 'images/' . $imageName, // Path without 'public/'
+                    'image_path' => 'cars/' . $imageName, // Path without 'public/'
                 ]);
 
                 $this->command->info('Tambah Mobil ' . $product->name);

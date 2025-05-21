@@ -6,33 +6,33 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 uses([LivewireAlert::class]);
 
-name('admin.index');
-usesPagination(theme: 'bootstrap');
+name("admin.index");
+usesPagination(theme: "bootstrap");
 
-state(['search'])->url();
+state(["search"])->url();
 
-state(['admin' => fn() => User::where('role', 'admin')->latest()->get()]);
+state(["admin" => fn() => User::where("role", "admin")->latest()->get()]);
 
 $deleted = function (User $user) {
     $user->delete();
 
     $this->flash(
-        'success',
-        'Proses Berhasil',
+        "success",
+        "Proses Berhasil",
         [
-            'position' => 'center',
-            'timer' => 3000,
-            'toast' => true,
-            'text' => '',
+            "position" => "center",
+            "timer" => 3000,
+            "toast" => true,
+            "text" => "",
         ],
-        '/superusers/admins',
+        "/superusers/admins",
     );
 };
 
 ?>
 <x-admin-layout>
     <x-slot name="title">Data Admin</x-slot>
-    @include('layouts.responsive')
+    @include("layouts.responsive")
 
     @volt
         <div>
@@ -46,9 +46,9 @@ $deleted = function (User $user) {
             </nav>
             <div class="card">
                 <div class="card-header">
-                    <div class="row justify-content-between text-center text-lg-start gap-2">
+                    <div class="row justify-content-between text-start gap-2">
                         <div class="col">
-                            <a class="btn btn-primary" href="{{ route('admin.create') }}" role="button">Tambah
+                            <a class="btn btn-primary" href="{{ route("admin.create") }}" role="button">Tambah
                                 Admin</a>
                             <span wire:loading class="spinner-border spinner-border-sm ms-3"></span>
                         </div>
@@ -56,7 +56,9 @@ $deleted = function (User $user) {
                 </div>
                 <div class="card-body">
                     <div class="table-responsive rounded">
-                        <table wire:ignore id="example" class="table table-hover display border" style="width: 100%">
+                        <table wire:ignore id="example"
+                            class="table table-hover display border text-nowrap text-nowrap text-nowrap"
+                            style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -73,13 +75,13 @@ $deleted = function (User $user) {
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->phone_number }}</td>
-                                        <td>
+                                        <td class="d-flex gap-3 align-items-center">
                                             <div class="btn-group btn-group-sm" role="group"
                                                 aria-label="Small button group">
 
                                             </div>
                                             <a type="button" class="btn btn-sm btn-warning "
-                                                href="{{ route('admin.edit', ['user' => $item->id]) }}">
+                                                href="{{ route("admin.edit", ["user" => $item->id]) }}">
                                                 Edit
                                             </a>
                                             <button type="button" class="btn btn-sm btn-danger "
